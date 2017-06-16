@@ -3,13 +3,15 @@ import pickle
 import threading
 import time
 
+DEFAULT_DATA = {'sweep_wnt': [], 'sweep_otr': []}
+
 
 class LidarDataClient(socket.socket):
     def __init__(self, h, p):
         super().__init__(socket.AF_INET, socket.SOCK_STREAM)
         self.connect((h, p))
 
-        self.data = {'sweep_wnt': [], 'sweep_otr': []}
+        self.data = DEFAULT_DATA
 
         self.running = False
         self.dt = threading.Thread(target=self.data_helper)
@@ -37,5 +39,9 @@ class LidarDataClient(socket.socket):
             nd = self.recv(8192)
             if nd[-1:] == b'\x03':
                 bs += nd[:-1]
-                return pickle.loads(bs)
+                try:
+                    return pickle.loads(bs)
+                except pickle.UnpicklingError:
+                    print("Error: Truncated data")
+                    return DEFAULT_DATA
             bs += nd
