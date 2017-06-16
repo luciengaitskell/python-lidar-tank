@@ -3,12 +3,7 @@ import socket
 import pickle
 import threading
 
-
-class AnalysisData:
-    sweep_wnt = []
-    sweep_otr = []
-
-analysis_data = AnalysisData()
+analysis_data = {'sweep_wnt': [], 'sweep_otr': []}
 
 
 class DataHandler(asyncore.dispatcher_with_send):

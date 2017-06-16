@@ -67,7 +67,5 @@ class LidarTankPlatform:
                 else:
                     tmp_sweep_otr.append([cart_p[0], cart_p[1]])
 
-                del self.analysis_data.sweep_wnt[:]
-                del self.analysis_data.sweep_otr[:]
-                self.analysis_data.sweep_wnt.extend(tmp_sweep_wnt)
-                self.analysis_data.sweep_otr.extend(tmp_sweep_otr)
+                self.analysis_data['sweep_wnt'] = tmp_sweep_wnt
+                self.analysis_data['sweep_otr'] = tmp_sweep_otr
