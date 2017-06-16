@@ -46,8 +46,9 @@ if __name__ == "__main__":
 
         while True:
             # Update plot data:
-            wnt_x, wnt_y = unzip_catch(s.get_wnt_data())
-            otr_x, otr_y = unzip_catch(s.get_otr_data())
+            d = s.data
+            wnt_x, wnt_y = unzip_catch(d['sweep_wnt'])
+            otr_x, otr_y = unzip_catch(d['sweep_otr'])
 
             wnt_pts.set_xdata(wnt_x)
             wnt_pts.set_ydata(wnt_y)
