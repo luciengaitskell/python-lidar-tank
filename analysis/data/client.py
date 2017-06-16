@@ -35,6 +35,7 @@ class LidarDataClient(socket.socket):
         bs = b''
         while True:
             nd = self.recv(8192)
-            bs += nd
             if nd[-1:] == b'\x03':
+                bs += nd[:-1]
                 return pickle.loads(bs)
+            bs += nd
