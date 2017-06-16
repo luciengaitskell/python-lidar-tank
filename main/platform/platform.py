@@ -1,6 +1,6 @@
 from sweeppy import Sweep
 from dagurs039 import DaguRS039
-from data import dataserver
+from .data import dataserver
 import math
 import os
 import threading
