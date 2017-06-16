@@ -4,18 +4,18 @@ import pickle
 import threading
 
 
-class Data:
+class AnalysisData:
     sweep_wnt = []
     sweep_otr = []
 
-data = Data()
+analysis_data = AnalysisData()
 
 
 class DataHandler(asyncore.dispatcher_with_send):
     def handle_read(self):
         rq = self.recv(8192)
         if rq == b'all_data':
-            self.send(pickle.dumps(data) + b'\x03')
+            self.send(pickle.dumps(analysis_data) + b'\x03')
 
 
 class DataServer(asyncore.dispatcher):
