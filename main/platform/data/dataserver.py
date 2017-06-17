@@ -3,17 +3,14 @@ import socket
 import pickle
 import threading
 
-sweep_wnt = []
-sweep_otr = []
+analysis_data = {'sweep_wnt': [], 'sweep_otr': []}
 
 
 class DataHandler(asyncore.dispatcher_with_send):
     def handle_read(self):
-        data = self.recv(8192)
-        if data == b'wnt_data_rq':
-            self.send(pickle.dumps(sweep_wnt))
-        elif data == b'otr_data_rq':
-            self.send(pickle.dumps(sweep_otr))
+        rq = self.recv(8192)
+        if rq == b'all_data':
+            self.send(pickle.dumps(analysis_data) + b'\x03')
 
 
 class DataServer(asyncore.dispatcher):

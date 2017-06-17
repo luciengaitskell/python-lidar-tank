@@ -12,8 +12,7 @@ class LidarTankPlatform:
     FORWARD = 100.
 
     # Create lists:
-    sweep_wnt = dataserver.sweep_wnt = []
-    sweep_otr = dataserver.sweep_otr = []
+    analysis_data = dataserver.analysis_data
 
     def __init__(self, *args, **kwargs):
         self.sweep = None
@@ -68,7 +67,5 @@ class LidarTankPlatform:
                 else:
                     tmp_sweep_otr.append([cart_p[0], cart_p[1]])
 
-                del self.sweep_wnt[:]
-                del self.sweep_otr[:]
-                self.sweep_wnt.extend(tmp_sweep_wnt)
-                self.sweep_otr.extend(tmp_sweep_otr)
+            self.analysis_data['sweep_wnt'] = tmp_sweep_wnt
+            self.analysis_data['sweep_otr'] = tmp_sweep_otr
