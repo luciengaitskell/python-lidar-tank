@@ -139,3 +139,5 @@ crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 
+# Analysis config:
+analysis/config/config.ini

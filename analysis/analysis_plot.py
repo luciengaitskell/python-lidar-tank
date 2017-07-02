@@ -1,12 +1,21 @@
 from data import LidarDataClient
-
+import configparser
 import matplotlib.pyplot as plt
 import math
 import os
 import time
+import sys
 
-HOST = 'localhost'   # The remote host
-PORT = 8080              # The same port as used by the server
+# Read config file:
+config = configparser.ConfigParser()
+config.read('config/config.ini')
+
+try:
+    HOST = config['Dataserver']['Host']         # The remote host
+    PORT = int(config['Dataserver']['Port'])    # The same port as used by the server
+except KeyError:
+    print("ERROR: Please create 'example.ini' in config directory, based on the provided example.")
+    sys.exit(1)
 
 # Create figure:
 fig1 = plt.figure(1)
